@@ -1,0 +1,16 @@
+version: '2'
+services:
+    wine-app:
+        image: wine
+        external_links:
+            - wine-mysql:mysql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/wine?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    wine-mysql:
+        extends:
+            file: mysql.yml
+            service: wine-mysql
